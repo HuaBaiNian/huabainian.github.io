@@ -1,1 +1,94 @@
-<!doctype html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>my-space</title><script defer="defer" src="/js/chunk-vendors.03ea9c11.js"></script><script defer="defer" src="/js/app.5ae7e99a.js"></script><link href="/css/chunk-vendors.f6cb92d5.css" rel="stylesheet"><link href="/css/app.8af96e26.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but my-space doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div></body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>话百年的个人空间</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/fontawesome-5.15.4.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/github-markdown.css" />
+    <link rel="stylesheet" type="text/css" href="css/markdown-override.css" />
+	
+	<link rel="stylesheet" type="text/css" href="css/h-space.css" />
+	
+	<!-- fontawesome 图标库的 js 文件，暂时没看出有什么用。
+	<script src="js/fontawesome-5.15.4.min.js"></script>
+	-->
+	<script src="js/marked.min.js"></script>
+
+  </head>
+  <body>
+      <div class="h-person-space">
+        <div class="h-bg"></div>
+        <button class="h-nav-switch"></button>
+        <div class="h-navbar">
+          <div class="h-nav-logo"></div>
+          <div class="h-nav-title">话百年的小屋</div>
+          <ul class="h-nav-list h-hidden-scrollbar">
+		  <!--
+			虽然通过 相同name 的 radio类型 的 input 的 checked css状态，以及 lable 标签的 for 属性，
+			可以简单地实现 tab 标签页切换，且不需使用 js。
+			但是根据 mdn 的说法，label 标签会和 a 标签的点击事件冲突。因而还是使用 js 切换导航标签页。
+			冲突具体表现在：当它俩相互嵌套时，只有内部元素的点击事件能触发。
+			此外，当它俩的显示区域重叠时，也会冲突。
+			也就是说，即使它俩没有相互嵌套，但是通过 absolute 定位等方式，使它们重叠，也会冲突。
+			此外，根据 mdn 的说法，label 还和 button 有冲突。
+		  -->
+			<li class="h-nav-item home-item">
+				<a href="#"><i class="fas fa-home fa-fw"></i><span>主页</span></a>
+			</li>
+			<li class="h-nav-item blog-item">
+				<a href="#/blog/page/1"><i class="fas fa-book fa-fw"></i><span>博客</span></a
+			</li>
+			<li class="h-nav-item novel-item">
+				<a href="#/novel"><i class="fas fa-book-open fa-fw"></i><span>小说</span></a>
+			</li>
+			<li class="h-nav-item music-item">
+				<a href="#/music"><i class="fas fa-music fa-fw"></i><span>音乐</span></a>
+			</li>
+			<li class="h-nav-item thanks-item">
+				<a href="#/thanks"><i class="fas fa-music fa-fw"></i><span>鸣谢</span></a>
+			</li>
+		  </ul>
+        </div>
+        <div class="h-content h-hidden-scrollbar">
+		  <div class="h-viewer"></div>
+        </div>
+      </div>
+	  
+	  <div class="h-pages">
+			<div class="h-home-page">
+				<div class="welcome-text"></div>
+			</div>
+			<div class="h-blog-list-page" data-page-num="1">
+				<ul class="blog-list"></ul>
+				<div class="page-change">
+					<button>Pervious</button>
+					<span class="page-count">
+						<span>第</span>
+						<span class="current-page-num">1</span>
+						<span>/</span>
+						<span class="total-page-num">1</span>
+						<span>页</span>
+					</span>
+					<button>Next</button>
+				</div>
+			</div>
+			<div class="h-blog-article-page">
+				<div class="markdown-body"></div>
+			</div>
+			<div class="h-novel-page">
+				<div id="novel-view"></div>
+			</div>
+			<div class="h-music-page">
+				music to be continue...
+			</div>
+			<div class="h-thanks-page">
+				thanks to be continue...
+			</div>			
+	  </div>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

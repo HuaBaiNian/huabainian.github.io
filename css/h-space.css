@@ -1,0 +1,370 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+ul, li, ol {
+	list-style: none;
+}
+
+:root {
+	--bg-color: rgba(227, 177, 177, 1.0);
+	--nav-color: rgba(220, 120, 120, 1.0);
+	--nav-list-color: rgba(230, 230, 230, 1.0);
+}
+
+.h-hidden-scrollbar::-webkit-scrollbar {
+	/display: none;
+}
+
+/* 全程 flex 布局，可避免各种高度塌陷问题。 */
+/* 但在没有显示设置宽高时，要防止内容溢出的问题。 */
+.h-person-space {
+	display: flex;
+	flex-direction: row;
+	
+	position: relative;
+	
+	height: 100%;
+}
+
+.h-bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	
+	/background: url(../img/1.png) center/cover no-repeat;
+	background: var(--bg-color);
+	
+	z-index: -100;
+}
+
+.h-navbar {
+	display: flex;
+	flex-direction: column;
+	
+	flex-shrink: 0;
+	
+	position: relative;
+	
+	width: 150px;
+	margin: 0 20px 0 100px;
+	
+	text-align: center;
+	background: var(--nav-color);
+	
+	/* 为导航的隐藏做准备 */
+	overflow: hidden;
+	transition: 1s;
+	white-space: nowrap;
+}
+
+.h-nav-switch {
+	position: absolute;
+	
+	width: 80px;
+	height: 80px;
+	
+	background: url(../img/smallbell.png) center/contain no-repeat;
+	border: none;
+	
+	top: calc(50% - 40px); /* 25px 为自身高度的一半 */
+}
+
+.h-nav-logo {
+	width: 100px;
+	height: 100px;
+	
+	flex-shrink: 0;
+	
+	margin: 20px 25px 10px 25px;
+	
+	background: url(../img/2.jpg) center/cover no-repeat;
+	
+	border: 1px solid transparent;
+	border-radius: 50%;
+}
+
+.h-nav-title {
+	flex-shrink: 0;
+	
+	margin: 0 25px 20px 25px;
+	
+	overflow: hidden;
+}
+
+.h-navbar .h-separation-row {
+	height: 1px;
+	border-top: 1px solid black;
+	margin: 0 28px;
+}
+
+.h-nav-list {
+	display: flex;
+	flex-direction: column;
+	
+	flex-grow: 1;
+	
+	margin: 0px 10px 0 10px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	
+	background: var(--nav-list-color);
+	
+	overflow: auto;
+}
+
+.h-nav-item {
+	text-align: left;
+	margin: 10px 18px;
+}
+
+.h-nav-item a {
+	text-decoration: none;
+}
+
+/*
+/* a标签顺序 LVHA，:focus 放在 :hover 前后都行。
+/* 浏览器会缓存 a标签 点过的链接，所以 a:link 通过看不到。
+/* :active 和 :visited 区别在于：:
+/*  	:active 鼠标点击的一瞬激活，按住不放一直激活。
+/* 		:focus 焦点在它身上一直激活。比如点击过后，或是键盘 tab 键切换到它后。
+*/
+.h-nav-item a:link {
+	color: black;
+}
+
+.h-nav-item a:visited {
+	color: black;
+}
+
+.h-nav-item a:focus {
+}
+
+.h-nav-item a:hover {
+}
+
+.h-nav-item a:active {
+}
+
+.h-nav-item.h-nav-item-active a {
+	color: red;
+}
+
+.h-nav-item span {
+	margin: 0 0 0 5px;
+}
+
+.h-content {
+	flex-grow: 1; /* 小心，没有显示定义宽度，可能出现内容溢出问题。*/
+	
+	margin: 0 100px 0 20px;
+	overflow: auto; /* 但由于设置了overflow，所以事实上确定了宽度。最小宽度为剩余宽度，当大于它时，overflow 裁剪到剩余宽度。 */
+}
+
+.h-viewer {
+	width: 100%; /* 由于上面的父元素 .h-content 事实上确定了宽度，所以此处百分比有效。 */
+	height: 100%;
+}
+
+.h-home-page {
+	height: 100%;
+	width: 100%;
+	
+	display: flex; /* 若下面的子元素 .welcome-text 设置了 margin，会发生外边距塌陷问题，设为 flex 既能解决该问题，也方便对齐。*/
+	justify-content: center;
+	align-items: center;
+	
+	/*
+	overflow: auto; 也可以解决外边距塌陷问题，而且设为 auto 似乎比 hidden 好。
+	*/
+	
+	scroll-behavior: smooth;
+}
+
+/*
+/* 另一种解决外边距塌陷问题的方法。所有方法的核心思路，是创建一个独立的 BFC 区域，使得其它元素的改动，不会影响到它。
+.h-home-page::before {
+	display: table;
+	content: "";
+}
+*/
+
+.welcome-text {	
+	writing-mode: vertical-rl;
+	font-size: 20px;
+	
+	width: 100px;
+	height: 200px;
+}
+
+.h-blog-list-page {
+	width: 100%;
+	height: 100%;
+	
+	display: flex;
+	flex-direction: column;
+	/* 
+	/* 当可用空间不够的时候，space-around 表现为 center，这样子元素在前面的内容就溢出了，不可接受。
+	/* 但我们又想前后有空格，所以在前后添加空白元素，以下用伪元素实现。
+	*/
+	justify-content: space-between; 
+}
+
+.h-blog-list-page::before, .h-blog-list-page::after {
+	content: "";
+	display: block; /* 伪元素默认为行内元素，设为 block 使得设置高度有效。 */
+	height: 10px;   /* 空白填充 */
+	flex-shrink: 0; /* 子元素尺寸相加大于父容器，会导致缩小。由于伪元素 content 为空，所以高度会被无视。此项使高度不被无效。*/
+}
+
+.h-blog-list-page ul {
+	flex-grow: 1;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.h-blog-list-page .page-change {
+	height: 25px;
+	
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	
+	margin: 10px 0;
+	
+	/border: 1px solid black;
+}
+
+.h-blog-list-page .page-change button {
+	width: 80px;
+	
+	cursor: pointer;
+	border: none;
+}
+
+.h-blog-list-page .page-change button:nth-child(1) {
+	padding: 0 20px;
+	clip-path: polygon(0 50%, 30% 0, 100% 0, 100% 100%, 30% 100%);
+	background: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+}
+
+.h-blog-list-page .page-change button:nth-child(1):active {
+	background: linear-gradient(to right, #ffa177 0%, #ffa67a 0%, #ffac7f 21%, #f9b185 52%, #cfa56c 78%, #b1aa5b 100%);
+}
+
+
+.h-blog-list-page .page-change button:last-child {
+	padding: 0 20px 0 0;
+	clip-path: polygon(100% 50%, 70% 0, 0 0, 0 100%, 70% 100%);
+	background: linear-gradient(to left, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+}
+
+.h-blog-list-page .page-change button:last-child:active {
+	background: linear-gradient(to left, #ffa177 0%, #ffa67a 0%, #ffac7f 21%, #f9b185 52%, #cfa56c 78%, #b1aa5b 100%);
+}
+
+.h-blog-list-page .page-count {
+	display: flex; /* 去除各个 span 标签之间的空白文本节点。 */
+	justify-content: space-around;
+}
+
+.h-blog-list-page ul li {
+	margin: 10px 0;
+	padding: 15px;
+	background: var(--nav-list-color);
+}
+
+.h-blog-list-page ul h2 {
+	margin: 0 0 10px 0;
+	background: var(--nav-list-color);
+}
+
+.h-blog-list-page ul a{
+	text-decoration: none;
+}
+
+.h-blog-list-page ul a:link {
+	color: rgba(0, 0, 0, 1.0);
+}
+
+.h-blog-list-page ul a:visited {
+	color: rgba(0, 0, 0, 1.0);
+}
+
+/*
+/* flex-grow: 1 相当于 min-width = 剩余宽度。
+/* 对于 flex 的父容器而言，若没有设置宽度，则由子项目撑开。
+/* 但这个没有设置宽度的父容器若恰好是爷容器的子项目，且子项目宽度大于爷容器剩余宽度，则父容器中的 flex-grow 相当于没用。
+/* pre 是块级元素，占满整行，但其内容不会自动换行，一般要设置 overflow: auto 防止文字溢出。
+/* 但若 pre 的父元素、祖先元素，属于宽度需要撑开的那一类，overflow 无效。此情形常见于 flex 布局，因为 div 作为子项目，默认占满整行失效。
+*/
+.h-blog-article-page {
+	/* 该元素高度塌陷，设为 flex 后，貌似能同时解决父元素、自己、子元素高度塌陷问题，可谓一举三得。 */
+	display: flex;
+	flex-direction: column;
+}
+
+.h-blog-article-page .markdown-body {
+	background: rgba(255, 240, 240, 1.0);
+	
+	padding: 20px 20px;
+}
+
+
+/* 媒体查询 */
+
+@media (max-width: 768px) {
+	.h-person-space {
+		display: flex;
+		flex-direction: column;
+		
+		height: 100%;
+	}
+	
+	.h-navbar {
+		display: flex;
+		flex-direction: row;
+		
+		flex-shrink: 0; /* 父元素flex为column，兄弟元素内容超出，会导致height自动缩小。将flex-shrink设为0,使得height生效。 */
+		
+		width: 100%; /* 需设为 100% 而非 auto，因为 navbar 虽是块级元素，但其父类是 flex。设为 auto 宽度将由内容撑开，从而无法出现滚动条。*/
+		height: 140px;
+		margin: 0;
+	}
+	
+	.h-nav-switch {
+		display: none;
+	}
+	
+	.h-nav-logo {
+		margin: auto 10px auto 10px;
+	}
+	
+	.h-nav-title {
+		display: none;
+	}
+	
+	.h-nav-list {
+		display: flex;
+		flex-direction: row;
+		
+		margin: 20px 10px 20px 0;
+	}
+	
+	.h-content {		
+		margin: 0 10px;
+	}
+	
+}
+
+.h-navbar.h-nav-hidden {
+	width: 0;
+	margin: 0 0 0 100px;
+}

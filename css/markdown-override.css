@@ -1,0 +1,21 @@
+/*
+/* 此样式表用于覆盖 github-markdown.css 库样式表
+/* 注意引入顺序
+*/
+
+.markdown-body {
+	padding: 0 20px;
+	
+	
+}
+
+.markdown-body pre {
+	background: hsl(0, 57%, 85%);
+}
+
+.markdown-body pre code {
+	//display: inline-block; 
+	/* 经测试 span、code 等inline元素（img除外）无法触发 wheel事件，故改为 inline-block 或 block */
+	/* 但后来发现，滚动条出现在 code 的父元素 pre 身上，故删去对 display 的修改。 */
+	
+}
