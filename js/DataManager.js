@@ -1,44 +1,39 @@
-import { TextCharsetDet } from "./UtilsManager.js";
-
-export default class DataManager {
-	_data;
-	_dataObj = {};
+/*
+ * @Description: 
+ */
+class DataManager {
+	_data = {};
 	
 	async PreLoad(url, type) {
-		await fetch(url).then((res) => {
-			switch(type) {
-				case "json": {
-					return res.json();
-				}
-				case "text": {
-					return res.text();
-				}
-				case "whattext": {
-					return res.arrayBuffer();
-				}
+		let data;
+		let res = await fetch(url);
+		switch(type) {
+			case "json": {
+				data = await res.json();
+				break;
 			}
-		}).then((data) => {
-			if(type == "whattext") {
-				let arr = new Uint8Array(data);
-				
-				let det = new TextCharsetDet();
-				let charset = det.DetCharset(arr);
-				
-				let decoder = new TextDecoder(charset);
-				let str = decoder.decode(arr);
-				
-				this._data = str;
-			} else {
-				this._data = data;
+			case "text": {
+				data = await res.text();
+				break;
 			}
-		});
+			default: {
+				data = await res.arrayBuffer();
+				break;
+			}
+		}
+
+		return data;
 	}
 	
-	SaveData(dataKey) {
-		this._dataObj[dataKey] = this._data;
+	SaveData(name, data) {
+		this._data[name] = data;
 	}
 	
-	GetData(dataKey) {
-		return this._dataObj[dataKey];
+	GetData(name) {
+		return this._data[name];
 	}
 }
+
+let dataMgr = new DataManager();
+
+export default dataMgr;

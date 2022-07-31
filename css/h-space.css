@@ -14,8 +14,10 @@ ul, li, ol {
 
 :root {
 	--bg-color: rgba(227, 177, 177, 1.0);
+	--bg-light-color: rgba(240, 220, 220, 1.0);
 	--nav-color: rgba(220, 120, 120, 1.0);
 	--nav-list-color: rgba(230, 230, 230, 1.0);
+	--a-click-color: rgba(245, 70, 26, 1.0);
 }
 
 .h-hidden-scrollbar::-webkit-scrollbar {
@@ -114,7 +116,7 @@ ul, li, ol {
 	border: 1px solid transparent;
 	border-radius: 5px;
 	
-	background: var(--nav-list-color);
+	background: var(--bg-light-color);
 	
 	overflow: auto;
 }
@@ -143,17 +145,8 @@ ul, li, ol {
 	color: black;
 }
 
-.h-nav-item a:focus {
-}
-
-.h-nav-item a:hover {
-}
-
-.h-nav-item a:active {
-}
-
 .h-nav-item.h-nav-item-active a {
-	color: red;
+	color: var(--a-click-color);
 }
 
 .h-nav-item span {
@@ -162,6 +155,8 @@ ul, li, ol {
 
 .h-content {
 	flex-grow: 1; /* 小心，没有显示定义宽度，可能出现内容溢出问题。*/
+	width: 100%;
+	height: 100%;
 	
 	margin: 0 100px 0 20px;
 	overflow: auto; /* 但由于设置了overflow，所以事实上确定了宽度。最小宽度为剩余宽度，当大于它时，overflow 裁剪到剩余宽度。 */
@@ -176,7 +171,7 @@ ul, li, ol {
 	height: 100%;
 	width: 100%;
 	
-	display: flex; /* 若下面的子元素 .welcome-text 设置了 margin，会发生外边距塌陷问题，设为 flex 既能解决该问题，也方便对齐。*/
+	display: flex; /* 若下面的子元素 .welcome设置了 margin，会发生外边距塌陷问题，设为 flex 既能解决该问题，也方便对齐。*/
 	justify-content: center;
 	align-items: center;
 	
@@ -195,7 +190,7 @@ ul, li, ol {
 }
 */
 
-.welcome-text {	
+.h-home-page .welcome {	
 	writing-mode: vertical-rl;
 	font-size: 20px;
 	
@@ -203,7 +198,7 @@ ul, li, ol {
 	height: 200px;
 }
 
-.h-blog-list-page {
+.h-blog-showcase-page {
 	width: 100%;
 	height: 100%;
 	
@@ -216,21 +211,21 @@ ul, li, ol {
 	justify-content: space-between; 
 }
 
-.h-blog-list-page::before, .h-blog-list-page::after {
+.h-blog-showcase-page::before, .h-blog-showcase-page::after {
 	content: "";
 	display: block; /* 伪元素默认为行内元素，设为 block 使得设置高度有效。 */
 	height: 10px;   /* 空白填充 */
 	flex-shrink: 0; /* 子元素尺寸相加大于父容器，会导致缩小。由于伪元素 content 为空，所以高度会被无视。此项使高度不被无效。*/
 }
 
-.h-blog-list-page ul {
+.h-blog-showcase-page ul {
 	flex-grow: 1;
 	
 	display: flex;
 	flex-direction: column;
 }
 
-.h-blog-list-page .page-change {
+.h-blog-showcase-page .page-change {
 	height: 25px;
 	
 	display: flex;
@@ -242,59 +237,59 @@ ul, li, ol {
 	/border: 1px solid black;
 }
 
-.h-blog-list-page .page-change button {
+.h-blog-showcase-page .page-change button {
 	width: 80px;
 	
 	cursor: pointer;
 	border: none;
 }
 
-.h-blog-list-page .page-change button:nth-child(1) {
+.h-blog-showcase-page .page-change button:nth-child(1) {
 	padding: 0 20px;
 	clip-path: polygon(0 50%, 30% 0, 100% 0, 100% 100%, 30% 100%);
 	background: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
 }
 
-.h-blog-list-page .page-change button:nth-child(1):active {
+.h-blog-showcase-page .page-change button:nth-child(1):active {
 	background: linear-gradient(to right, #ffa177 0%, #ffa67a 0%, #ffac7f 21%, #f9b185 52%, #cfa56c 78%, #b1aa5b 100%);
 }
 
 
-.h-blog-list-page .page-change button:last-child {
+.h-blog-showcase-page .page-change button:last-child {
 	padding: 0 20px 0 0;
 	clip-path: polygon(100% 50%, 70% 0, 0 0, 0 100%, 70% 100%);
 	background: linear-gradient(to left, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
 }
 
-.h-blog-list-page .page-change button:last-child:active {
+.h-blog-showcase-page .page-change button:last-child:active {
 	background: linear-gradient(to left, #ffa177 0%, #ffa67a 0%, #ffac7f 21%, #f9b185 52%, #cfa56c 78%, #b1aa5b 100%);
 }
 
-.h-blog-list-page .page-count {
+.h-blog-showcase-page .page-count {
 	display: flex; /* 去除各个 span 标签之间的空白文本节点。 */
 	justify-content: space-around;
 }
 
-.h-blog-list-page ul li {
+.h-blog-showcase-page ul li {
 	margin: 10px 0;
 	padding: 15px;
-	background: var(--nav-list-color);
+	background: var(--bg-light-color);
 }
 
-.h-blog-list-page ul h2 {
+.h-blog-showcase-page ul h2 {
 	margin: 0 0 10px 0;
-	background: var(--nav-list-color);
+	background: var(--bg-light-color);
 }
 
-.h-blog-list-page ul a{
+.h-blog-showcase-page ul a{
 	text-decoration: none;
 }
 
-.h-blog-list-page ul a:link {
+.h-blog-showcase-page ul a:link {
 	color: rgba(0, 0, 0, 1.0);
 }
 
-.h-blog-list-page ul a:visited {
+.h-blog-showcase-page ul a:visited {
 	color: rgba(0, 0, 0, 1.0);
 }
 
@@ -312,11 +307,37 @@ ul, li, ol {
 }
 
 .h-blog-article-page .markdown-body {
-	background: rgba(255, 240, 240, 1.0);
-	
-	padding: 20px 20px;
+	background: var(--bg-light-color);
 }
 
+.h-novel-article-page {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: center;
+}
+
+.h-novel-article-page .novel-viewer {
+	width: 768px;
+	margin: 0 5px;
+	padding: 0 50px;
+	background: var(--bg-light-color);
+	box-shadow: 3px 0 3px #cfb0b5, -3px -0 3px #cfb0b5;
+	color:rgb(30, 30, 30)
+}
+
+.h-novel-article-page .novel-title {
+	margin: 30px 0 20px 0;
+	text-align: center;
+}
+
+
+.save-novel {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
 
 /* 媒体查询 */
 

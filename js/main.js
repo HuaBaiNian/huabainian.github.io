@@ -1,40 +1,29 @@
-import StateManager from "./StateManager.js";
-import PageManager from "./PageManager.js";
-import EventManager from "./EventManager.js";
-import MediaQueryManager from "./MediaQueryManager.js";
-import URLManager from "./URLManager.js";
-import DataManager from "./DataManager.js";
-import NovelManager from "./NovelManager.js";
+/*
+ * @Description: 
+ */
+import mainMgr from "./MainManager.js";
+import mqMgr from "./MediaQueryManager.js";
+import urlMgr from "./URLManager.js";
+import dataMgr from "./DataManager.js";
+import { Test } from "./Test.js";
 
-const stateMgr = new StateManager();
+Test();
 
-const dataMgr = new DataManager();
+await mainMgr.Init();
 
-const pageMgr = new PageManager();
-pageMgr.Init();
-
-const eveMgr = new EventManager(stateMgr, pageMgr);
-eveMgr.Init();
-
-const mqMgr = new MediaQueryManager(pageMgr, eveMgr);
 mqMgr.Init();
 
-const viewer = document.querySelector(".h-viewer");
-const urlMgr = new URLManager(stateMgr, pageMgr, dataMgr, eveMgr, viewer);
 urlMgr.Init();
 
-await dataMgr.PreLoad("data/blog/contents.json", "json");
-dataMgr.SaveData("blogContents");
+let bc = await dataMgr.PreLoad("data/blog/contents.json", "json");
+dataMgr.SaveData("blogContents", bc);
 
-await dataMgr.PreLoad("data/home.json", "json");
-dataMgr.SaveData("homeData");
+let hd = await dataMgr.PreLoad("data/home.json", "json");
+dataMgr.SaveData("homeData", hd);
 
-await dataMgr.PreLoad("data/《大道纪》作者：裴屠狗.txt", "whattext");
-dataMgr.SaveData("novel");
+let nl = await dataMgr.PreLoad("data/novel/novel.db3");
+dataMgr.SaveData("novel", nl);
 
 
-urlMgr.Listen();
-
-// 根据 url 修理页面的一些样式，所以与初始化 Init 分开。
-pageMgr.FixPage();
+await urlMgr.Listen();
 

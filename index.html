@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>话百年的个人空间</title>
 	
-	<link rel="stylesheet" type="text/css" href="css/fontawesome-5.15.4.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/github-markdown.css" />
+	<link rel="stylesheet" type="text/css" href="libs/fontawesome/css/fontawesome-5.15.4.min.css" />
+    <link rel="stylesheet" type="text/css" href="libs/github-markdown/github-markdown.css" />
+    <link rel="stylesheet" type="text/css" href="libs/highlight/highlight.min.css" />
     <link rel="stylesheet" type="text/css" href="css/markdown-override.css" />
 	
 	<link rel="stylesheet" type="text/css" href="css/h-space.css" />
@@ -16,8 +17,11 @@
 	<!-- fontawesome 图标库的 js 文件，暂时没看出有什么用。
 	<script src="js/fontawesome-5.15.4.min.js"></script>
 	-->
-	<script src="js/marked.min.js"></script>
-
+	<script src="libs/markedjs/marked.min.js"></script>
+	<script src="libs/highlight/highlight.min.js"></script>
+	<script src="libs/sqljs/sql-wasm.js"></script>
+	
+	
   </head>
   <body>
       <div class="h-person-space">
@@ -48,8 +52,11 @@
 			<li class="h-nav-item music-item">
 				<a href="#/music"><i class="fas fa-music fa-fw"></i><span>音乐</span></a>
 			</li>
+			<li class="h-nav-item tools-item">
+				<a href="#/tools"><i class="fas fa-heart fa-fw"></i><span>工具</span></a>
+			</li>
 			<li class="h-nav-item thanks-item">
-				<a href="#/thanks"><i class="fas fa-music fa-fw"></i><span>鸣谢</span></a>
+				<a href="#/thanks"><i class="fas fa-heart fa-fw"></i><span>鸣谢</span></a>
 			</li>
 		  </ul>
         </div>
@@ -60,9 +67,9 @@
 	  
 	  <div class="h-pages">
 			<div class="h-home-page">
-				<div class="welcome-text"></div>
+				<div class="welcome"></div>
 			</div>
-			<div class="h-blog-list-page" data-page-num="1">
+			<div class="h-blog-showcase-page" data-page-num="1">
 				<ul class="blog-list"></ul>
 				<div class="page-change">
 					<button>Pervious</button>
@@ -79,12 +86,26 @@
 			<div class="h-blog-article-page">
 				<div class="markdown-body"></div>
 			</div>
-			<div class="h-novel-page">
-				<div id="novel-view"></div>
+			<div class="h-novel-showcase-page">
+				<ul class="novel-list"></ul>
 			</div>
-			<div class="h-music-page">
+			<div class="h-novel-article-page">
+				<div class="novel-viewer"></div>
+			</div>
+			<div class="h-music-showcase-page">
 				music to be continue...
 			</div>
+			<div class="h-tools-page">
+				<div class="save-novel">
+					<div>
+						<label for="">上传小说</label>
+						<input type="file" class="upnovel">
+					</div>
+					<button class="newdb" disabled>新建数据库</button>
+					<button class="updatedb" disabled>更新数据库</button>
+					<button class="downdb" disabled>下载数据库</button>
+				</div>
+			</div>	
 			<div class="h-thanks-page">
 				thanks to be continue...
 			</div>			

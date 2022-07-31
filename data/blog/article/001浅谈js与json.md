@@ -8,8 +8,8 @@ mdn上说，js与json不同，这固然正确。但在实际的代码层面，�
 常见的与json有关的名词有这几个：json对象、json字符串、json文件。
 json文件好理解，就是那个以 `.json` 结尾的文件。它是一个文本文件，也就说用普通文本编辑器就能打开查看的，不像二进制文件，用文本编辑器打开是乱码。
 
-json对象、json字符串，如果我没弄错的话，它们俩其实是一个东西。而且就是一个稍显特殊的js字符串。比如：
-```
+json对象、json字符串，如果我没弄错的话，它们俩其实是一个东西。而且就是一个稍显特殊的js字符串。比如：  
+```javascript
 let json_str1 = '[1, 2, 3]';
 let json_str2 = '{"name": "张三"}';
 ```
@@ -18,7 +18,7 @@ let json_str2 = '{"name": "张三"}';
 现在，有了这特殊的字符串，我们能干什么呢？首先，我们可以将字符串通过文件流的形式，写入一个文本文件，保存到硬盘，对吧。其次，我们也可以从字符串中还原出js数组或js对象，对吧。
 
 先说还原数组或对象。这就提到了 `JSON.parse()` 方法和 `JSON.stringify()` 方法。
-```
+```javascript
 let json_str1 = '[1, 2, 3]';
 let arr = JSON.parse(json_str1);
 console.log(arr.constructor);
@@ -27,7 +27,7 @@ console.log(arr.constructor);
 如上，parse是“解析”的意思，它将一个json字符串还原成js数组或对象。
 
 那么，反过来，能不能将js数组或对象变成json字符串呢。可以，用 `JSON.stringify()` 。
-```
+```javascript
 let obj = {"age": 18};
 let json_str2 = JSON.stringify(obj);
 // console.log(json_str2);
@@ -38,7 +38,7 @@ json_str2
 如上，stringify将js数组或对象，进行字符串化。但在上述例子中请注意，console.log()显示字符串时会去除引号，所以直接在开发者控制台输入该变量。
 
 更进一步，如何不是数组或对象，而是一般的js变量呢？看情况，比如只含数字的字符串就行，而一般字符串不行。如下
-```
+```javascript
 let a = '123';
 JSON.parse(a);
 // 输出 123

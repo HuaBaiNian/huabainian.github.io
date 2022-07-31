@@ -1,6 +1,6 @@
-export default class PageManager {
+class PageManager {
 	_pages = {};
-	_currentPageName = "home";
+	_currentPage = "home"; // 标志当前页面类型，比如 blogShowcase 和 blogArticle 都属于 blog。
 	
 	/*********************
 	/*
@@ -11,29 +11,29 @@ export default class PageManager {
 		let hiddenPages = this.GetPage(".h-pages");
 		
 		let homePage = this.GetPage(".h-home-page");
-		let wcPage = this.GetPage(".welcome-text");
 		
-		let blogPage = this.GetPage(".h-blog-list-page");
-		let blogList = this.GetPage(".blog-list");
+		let blogShowcasePage = this.GetPage(".h-blog-showcase-page");
 		
-		let articlePage = this.GetPage(".h-blog-article-page");
-		let mdPage = this.GetPage(".markdown-body");
+		let blogArticlePage = this.GetPage(".h-blog-article-page");
 
-		let novelPage = this.GetPage(".h-novel-page");
+		let novelShowcasePage = this.GetPage(".h-novel-showcase-page");
+
+		let novelArticlePage = this.GetPage(".h-novel-article-page");
 		
-		let musicPage = this.GetPage(".h-music-page");
+		let musicShowcasePage = this.GetPage(".h-music-showcase-page");
+
+		let toolsPage = this.GetPage(".h-tools-page");
 		
 		let thanksPage = this.GetPage(".h-thanks-page");
 		
 		this.SetPage("hidden", hiddenPages);
 		this.SetPage("home", homePage);
-		this.SetPage("wc", wcPage);
-		this.SetPage("blog", blogPage);
-		this.SetPage("blogList", blogList);
-		this.SetPage("article", articlePage);
-		this.SetPage("md", mdPage);
-		this.SetPage("novel", novelPage);
-		this.SetPage("music", musicPage);
+		this.SetPage("blogShowcase", blogShowcasePage);
+		this.SetPage("blogArticle", blogArticlePage);
+		this.SetPage("novelShowcase", novelShowcasePage);
+		this.SetPage("novelArticle", novelArticlePage);
+		this.SetPage("musicShowcase", musicShowcasePage);
+		this.SetPage("tools", toolsPage);
 		this.SetPage("thanks", thanksPage);
 		
 		// remove 移除后的元素仍然存在，可以后续添加。只是不存在于文档树中，所以无法查询到，故要先行缓存，保留引用。
@@ -43,6 +43,10 @@ export default class PageManager {
 	}
 	
 	FixPage() {
+		for(let el of this.GetPages(".h-nav-item")) {
+			el.classList.remove("h-nav-item-active");
+		}
+
 		switch(this.GetCurrent()) {
 		case "home": {
 			this.GetPage(".home-item").classList.add("h-nav-item-active");
@@ -60,15 +64,23 @@ export default class PageManager {
 			this.GetPage(".music-item").classList.add("h-nav-item-active");
 			break;
 		}
+		case "tools": {
+			this.GetPage(".tools-item").classList.add("h-nav-item-active");
+			break;
+		}
+		case "thanks": {
+			this.GetPage(".thanks-item").classList.add("h-nav-item-active");
+			break;
+		}
 	}
 	}
 	
-	SetCurrent(str) {
-		this._currentPageName = str;
+	SetCurrent(pageName) {
+		this._currentPage = pageName;
 	}
 	
 	GetCurrent() {
-		return this._currentPageName;
+		return this._currentPage;
 	}
 	
 	SetPage(pageName, pageEle) {
@@ -88,8 +100,8 @@ export default class PageManager {
 		}
 	}
 	
-	GetPages(str) {
-		return document.querySelectorAll(str);
+	GetPages(pageName) {
+		return document.querySelectorAll(pageName);
 	}
 	
 	AddPage(parEle, sonEle) {
@@ -102,3 +114,8 @@ export default class PageManager {
 		}
 	}
 }
+
+let pageMgr = new PageManager();
+pageMgr.Init();
+
+export default pageMgr;
