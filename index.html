@@ -47,7 +47,7 @@
 				<a href="#/blog/page/1"><i class="fas fa-book fa-fw"></i><span>博客</span></a
 			</li>
 			<li class="h-nav-item novel-item">
-				<a href="#/novel"><i class="fas fa-book-open fa-fw"></i><span>小说</span></a>
+				<a href="#/novel/page"><i class="fas fa-book-open fa-fw"></i><span>小说</span></a>
 			</li>
 			<li class="h-nav-item music-item">
 				<a href="#/music"><i class="fas fa-music fa-fw"></i><span>音乐</span></a>
@@ -72,7 +72,7 @@
 			<div class="h-blog-showcase-page" data-page-num="1">
 				<ul class="blog-list"></ul>
 				<div class="page-change">
-					<button>Pervious</button>
+					<button class="pre-blog-page">Pervious</button>
 					<span class="page-count">
 						<span>第</span>
 						<span class="current-page-num">1</span>
@@ -80,7 +80,7 @@
 						<span class="total-page-num">1</span>
 						<span>页</span>
 					</span>
-					<button>Next</button>
+					<button class="next-blog-page">Next</button>
 				</div>
 			</div>
 			<div class="h-blog-article-page">
@@ -90,7 +90,15 @@
 				<ul class="novel-list"></ul>
 			</div>
 			<div class="h-novel-article-page">
-				<div class="novel-viewer"></div>
+				<div class="viewer-wrapper">
+					<div class="novel-change-wrapper">
+						<div class="novel-change">
+							<button class="pre-novel-page">上页</button>
+							<button class="next-novel-page">下页</button>
+						</div>
+					</div>
+					<div class="novel-viewer"></div>
+				</div>
 			</div>
 			<div class="h-music-showcase-page">
 				music to be continue...

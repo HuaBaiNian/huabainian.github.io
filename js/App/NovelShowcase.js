@@ -17,10 +17,11 @@ class NovelShowcase extends AppManager {
         let ul = this._mgrPage.querySelector(".novel-list");
         ul.innerHTML = "";
         
-        let data = dataMgr.GetData("novel");
-        let ui8 = new Uint8Array(data);
-        let db = new stateMgr._sql.Database(ui8);
-
+        let nl = dataMgr.GetData("novel");
+		let nl_temp = await nl;
+		let ui8 = new Uint8Array(nl_temp);
+		let db = new stateMgr._sql.Database(ui8);
+        
         let novels = [];
 
         const searchNovel = "SELECT name, author, description FROM novel";
@@ -36,12 +37,29 @@ class NovelShowcase extends AppManager {
 
         for(let i=0; i < novels.length; i++) {
             let li = document.createElement("li");
-            let title = document.createElement("h2");
-            title.innerHTML = novels[i].name;
+			li.classList.add("novel-item");
+            let title = document.createElement("h3");
+            let a = document.createElement("a");
+            a.innerHTML = novels[i].name;
+            a.href = `#/novel/article/${novels[i].name}/1`;
+            title.appendChild(a);
             let author = document.createElement("h3");
             author.innerHTML = novels[i].author;
             let des = document.createElement("div");
-            des.innerHTML = novels[i].des;
+			des.classList.add("novel-desc");
+			
+			let contentArr = novels[i].des.split("\r\n");
+			if(contentArr.length == 1) {
+				contentArr = novels[i].des.split("\n");
+			}
+
+			for(let c of contentArr) {
+				let p = document.createElement("p");
+				p.innerHTML = c;
+				des.appendChild(p);
+			}
+			
+            //des.innerHTML = novels[i].des;
             li.appendChild(title);
             li.appendChild(author);
             li.appendChild(des);

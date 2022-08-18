@@ -5,6 +5,7 @@ import mainMgr from "./MainManager.js";
 import mqMgr from "./MediaQueryManager.js";
 import urlMgr from "./URLManager.js";
 import dataMgr from "./DataManager.js";
+import stateMgr from "./StateManager.js";
 import { Test } from "./Test.js";
 
 Test();
@@ -21,8 +22,8 @@ dataMgr.SaveData("blogContents", bc);
 let hd = await dataMgr.PreLoad("data/home.json", "json");
 dataMgr.SaveData("homeData", hd);
 
-let nl = await dataMgr.PreLoad("data/novel/novel.db3");
-dataMgr.SaveData("novel", nl);
+let nl = dataMgr.PreLoad("data/novel/novel.db3");
+dataMgr.SaveData("novel", nl); // 保存的是一个 promise
 
 
 await urlMgr.Listen();

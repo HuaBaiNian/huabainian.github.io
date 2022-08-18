@@ -32,6 +32,7 @@ ul, li, ol {
 	
 	position: relative;
 	
+	width: 100%;
 	height: 100%;
 }
 
@@ -310,28 +311,81 @@ ul, li, ol {
 	background: var(--bg-light-color);
 }
 
+.h-novel-showcase-page .novel-item {
+	background: var(--bg-light-color);
+	padding: 10px 20px;
+}
+
+.h-novel-showcase-page .novel-desc {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+
 .h-novel-article-page {
 	width: 100%;
 	height: 100%;
 
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .h-novel-article-page .novel-viewer {
-	width: 768px;
-	margin: 0 5px;
-	padding: 0 50px;
+	width: 100%;
+	padding: 20px 50px;
 	background: var(--bg-light-color);
-	box-shadow: 3px 0 3px #cfb0b5, -3px -0 3px #cfb0b5;
 	color:rgb(30, 30, 30)
 }
 
+.h-novel-article-page .novel-viewer::before {
+	display: table;
+	content: "";
+}
+
+.h-novel-article-page .novel-viewer::after {
+	display: table;
+	content: "";
+}
+
 .h-novel-article-page .novel-title {
-	margin: 30px 0 20px 0;
 	text-align: center;
 }
 
+.h-novel-article-page p {
+	margin: 10px 0;
+}
+
+.h-novel-article-page .viewer-wrapper {
+	width: 100%;
+}
+
+.h-novel-article-page .novel-change-wrapper {
+	position: sticky; /* 用于固定在顶部，但直接用 sticky 会占用位置，所以与下面的 absolute 结合，使自身高度为 0 。*/
+	top: 0;
+	left: 0;
+	
+	width: 100%;
+}
+
+.h-novel-article-page .novel-change {
+	position: absolute;
+	
+	display: flex;
+	justify-content: space-between;
+	
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0.2;
+	transition: 1s;
+}
+
+.h-novel-article-page .novel-change:hover {
+	opacity: 1;
+}
 
 .save-novel {
 	display: flex;
@@ -380,7 +434,7 @@ ul, li, ol {
 	}
 	
 	.h-content {		
-		margin: 0 10px;
+		margin: 0;
 	}
 	
 }

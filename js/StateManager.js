@@ -8,6 +8,9 @@ class StateManager {
 	_blogPageNum = 0;
 	_blogShowNum = 10;
 	_sql;
+	_currentBlogPage;
+	_currentNovelName;
+	_currentNovelPage;
 }
 
 let stateMgr = new StateManager();

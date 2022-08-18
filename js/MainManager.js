@@ -18,21 +18,40 @@ class MainManager {
 		pageMgr.GetPage(".h-nav-logo").addEventListener("click", this.OnLogoClick);
 		
 		let blogShowcase = pageMgr.GetPage("blogShowcase");
-		let previousBtn = blogShowcase.querySelectorAll("button").item(0); //item是方法，用圆括号。危险写法，下标可能越界。
-		let nextBtn = blogShowcase.querySelectorAll("button").item(1);
+		let preBlogPage = blogShowcase.querySelector(".pre-blog-page"); //item是方法，用圆括号。危险写法，下标可能越界。
+		let nextBlogPage = blogShowcase.querySelector(".next-blog-page");
 		
-		// 此处会重复添加事件监听，可以想个办法放出去。
-		previousBtn.addEventListener("click", () => {
-			let curPageNum = parseInt(blogShowcase.dataset.pageNum);
-			if((curPageNum - 1) > 0) {
-				window.location.hash = "#/blog/page/" + (curPageNum - 1);
+		preBlogPage.addEventListener("click", () => {
+			let curBlogPage = stateMgr._currentBlogPage;
+			if((curBlogPage - 1) > 0) {
+				window.location.hash = "#/blog/page/" + (curBlogPage - 1);
 			}
 		});
 		
-		nextBtn.addEventListener("click", () => {
-			let curPageNum = parseInt(blogShowcase.dataset.pageNum);
-			if((curPageNum + 1) <= this._stateMgr._blogPageNum) {
-				window.location.hash = "#/blog/page/" + (curPageNum + 1);
+		nextBlogPage.addEventListener("click", () => {
+			let curBlogPage = stateMgr._currentBlogPage;
+			if((curBlogPage + 1) <= stateMgr._totalBlogPage) {
+				window.location.hash = "#/blog/page/" + (curBlogPage + 1);
+			}
+		});	
+		
+		let novelArticle = pageMgr.GetPage("novelArticle");
+		let preNovelPage = novelArticle.querySelector(".pre-novel-page");
+		let nextNovelPage = novelArticle.querySelector(".next-novel-page");
+		
+
+		
+		preNovelPage.addEventListener("click", () => {
+			let curNovelPage = stateMgr._currentNovelPage;
+			if((curNovelPage - 1) > 0) {
+				window.location.hash = "#/novel/article/" + stateMgr._currentNovelName + "/" + (curNovelPage - 1);
+			}
+		});
+		
+		nextNovelPage.addEventListener("click", () => {
+			let curNovelPage = stateMgr._currentNovelPage;
+			if((curNovelPage + 1)) {
+				window.location.hash = "#/novel/article/" + stateMgr._currentNovelName + "/" + (curNovelPage + 1);
 			}
 		});	
 	}

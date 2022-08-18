@@ -15,6 +15,8 @@ class BlogShowcase extends AppManager {
 		pageMgr.FixPage();
 
         let hash = window.location.hash;
+		let curPageNum = parseInt(window.location.hash.split("/").pop());
+		stateMgr._currentBlogPage = curPageNum;
 		
 		let blogPage = this._mgrPage;
 		let blogList = blogPage.querySelector(".blog-list");
@@ -33,10 +35,7 @@ class BlogShowcase extends AppManager {
 			(blogLength / itemShowNum) :
 			(Math.floor(blogLength / itemShowNum) + 1);
 			
-		stateMgr._blogPageNum = totalPageNum;
-		
-		let curPageNum = parseInt(hash.split("\/").slice(-1)[0]); // String 类型转 Number。
-		blogPage.dataset.pageNum = "" + curPageNum;
+		stateMgr._totalBlogPage = totalPageNum;
 
 			
 		// 虽然 curSpan 元素 是 blog 元素的后代元素，且 blog 元素已经缓存。
