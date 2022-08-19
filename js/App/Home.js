@@ -13,7 +13,8 @@ class Home extends AppManager {
         pageMgr.FixPage();
 
         let welcome = this._mgrPage.querySelector(".welcome");
-		let homeData = dataMgr.GetData("homeData");
+		let hd = dataMgr.GetData("homeData");
+		let homeData = await hd;
 		let ix = Math.floor(Math.random() * homeData.length);
 		welcome.innerHTML = homeData[ix];
     }

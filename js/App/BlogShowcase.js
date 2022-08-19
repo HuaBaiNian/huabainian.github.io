@@ -25,8 +25,8 @@ class BlogShowcase extends AppManager {
 		let curSpan = blogPage.querySelector(".current-page-num");
 		let totalSpan = blogPage.querySelector(".total-page-num");
 		
-		
-		let blogContents = dataMgr.GetData("blogContents");
+		let bc = dataMgr.GetData("blogContents");
+		let blogContents = await bc;
 		let blogLength = blogContents.length;
 		
 		let itemShowNum = stateMgr._blogShowNum;

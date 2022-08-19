@@ -14,7 +14,8 @@ class BlogArticle extends AppManager {
 
         let id = window.location.hash.split("/").at(-1);
 
-		let blogContents = dataMgr.GetData("blogContents");
+		let bc = dataMgr.GetData("blogContents");
+		let blogContents = await bc;
         let md = this._mgrPage.querySelector(".markdown-body");
 		for(let item of blogContents) {
 			if(item["id"] == id) {

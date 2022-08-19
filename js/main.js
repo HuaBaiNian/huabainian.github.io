@@ -16,10 +16,10 @@ mqMgr.Init();
 
 urlMgr.Init();
 
-let bc = await dataMgr.PreLoad("data/blog/contents.json", "json");
+let bc = dataMgr.PreLoad("data/blog/contents.json", "json");
 dataMgr.SaveData("blogContents", bc);
 
-let hd = await dataMgr.PreLoad("data/home.json", "json");
+let hd = dataMgr.PreLoad("data/home.json", "json");
 dataMgr.SaveData("homeData", hd);
 
 let nl = dataMgr.PreLoad("data/novel/novel.db3");
