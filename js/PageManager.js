@@ -40,6 +40,8 @@ class PageManager {
 		// 由于父元素会维持文档结构，所以不必缓存子元素，可以通过 父元素.querySelector 查询得到。
 		// 该方法主要用于页面大段元素隐藏，可能有人对该方法有顾虑，那么我想可以通过元素拷贝的方法实现隐藏效果。
 		hiddenPages.remove();
+		console.log(hiddenPages);
+		console.log(123);
 	}
 	
 	FixPage() {
